@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "auth-api-001",
+		"name": "1. Auth API",
+		"description": "API untuk Autentikasi - Register, Login, Logout, Password Reset, Email Verification",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"johndoe@example.com\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\",\n    \"phone\": \"081234567890\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "register"]
+						},
+						"description": "Register akun baru"
+					}
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"johndoe@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "login"]
+						},
+						"description": "Login dan dapatkan access token"
+					}
+				},
+				{
+					"name": "Get Current User (Me)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/me",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "me"]
+						},
+						"description": "Dapatkan info user yang sedang login"
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/logout",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "logout"]
+						},
+						"description": "Logout dan invalidate token"
+					}
+				}
+			]
+		},
+		{
+			"name": "Password Reset",
+			"item": [
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"johndoe@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/auth/password/forgot",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "auth", "password", "forgot"]
+						},
+						"description": "Request reset password link via email"
+					}
+				},
+				{
+					"name": "Verify Reset Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"johndoe@example.com\",\n    \"token\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/auth/password/verify-token",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "auth", "password", "verify-token"]
+						},
+						"description": "Verifikasi token reset password"
+					}
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"johndoe@example.com\",\n    \"token\": \"123456\",\n    \"password\": \"newpassword123\",\n    \"password_confirmation\": \"newpassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/auth/password/reset",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "auth", "password", "reset"]
+						},
+						"description": "Reset password dengan token yang valid"
+					}
+				}
+			]
+		},
+		{
+			"name": "Email Verification",
+			"item": [
+				{
+					"name": "Resend Verification Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/auth/email/resend-verification",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "auth", "email", "resend-verification"]
+						},
+						"description": "Kirim ulang email verifikasi"
+					}
+				},
+				{
+					"name": "Check Verification Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/auth/email/verification-status",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "auth", "email", "verification-status"]
+						},
+						"description": "Cek status verifikasi email"
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://smart-environment-web.citiasiainc.id",
+			"type": "string"
+		}
+	]
+}

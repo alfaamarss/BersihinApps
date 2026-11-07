@@ -1,0 +1,857 @@
+{
+	"info": {
+		"_postman_id": "waste-invoice-api-008",
+		"name": "8. Waste & Invoice Management API",
+		"description": "API untuk Admin Web - Waste Deliveries, Waste Carries, Invoices, Payments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Waste Deliveries",
+			"item": [
+				{
+					"name": "Get Waste Deliveries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-deliveries?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-deliveries"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Waste Delivery Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-deliveries/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-deliveries", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Waste Delivery",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service_account_id\": 1,\n    \"collector_id\": 2,\n    \"delivery_date\": \"2024-01-15\",\n    \"status\": \"pending\",\n    \"total_weight\": 10.5,\n    \"total_amount\": 50000,\n    \"notes\": \"Pengambilan rutin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-deliveries",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-deliveries"]
+						}
+					}
+				},
+				{
+					"name": "Update Waste Delivery",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"completed\",\n    \"total_weight\": 12.5,\n    \"total_amount\": 60000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-deliveries/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-deliveries", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Waste Delivery",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-deliveries/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-deliveries", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Waste Delivery Items",
+			"item": [
+				{
+					"name": "Get Waste Delivery Items",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-delivery-items?page=1&per_page=10&waste_delivery_id=1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-delivery-items"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "waste_delivery_id",
+									"value": "1",
+									"description": "Optional filter"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Waste Delivery Item Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-delivery-items/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-delivery-items", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Waste Delivery Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"waste_delivery_id\": 1,\n    \"waste_id\": 1,\n    \"pocket_size_id\": 1,\n    \"quantity\": 2,\n    \"weight\": 5.5,\n    \"price\": 10000,\n    \"subtotal\": 20000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-delivery-items",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-delivery-items"]
+						}
+					}
+				},
+				{
+					"name": "Update Waste Delivery Item",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"quantity\": 3,\n    \"weight\": 8.0,\n    \"subtotal\": 30000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-delivery-items/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-delivery-items", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Waste Delivery Item",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-delivery-items/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-delivery-items", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Waste Carries",
+			"item": [
+				{
+					"name": "Get Waste Carries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-carries?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-carries"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Pengangkutan sampah ke TPA"
+					}
+				},
+				{
+					"name": "Get Waste Carry Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-carries/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-carries", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Waste Carry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"garbage_dump_id\": 1,\n    \"carrier_id\": 2,\n    \"carry_date\": \"2024-01-15\",\n    \"total_weight\": 100.5,\n    \"vehicle_number\": \"B 1234 XYZ\",\n    \"notes\": \"Pengangkutan rutin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-carries",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-carries"]
+						}
+					}
+				},
+				{
+					"name": "Update Waste Carry",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"total_weight\": 120.5,\n    \"status\": \"completed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-carries/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-carries", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Waste Carry",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/waste-carries/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "waste-carries", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "Get Invoices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/invoices?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invoices"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Invoice Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/invoices/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invoices", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Invoice",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service_account_id\": 1,\n    \"invoice_number\": \"INV-2024-001\",\n    \"invoice_date\": \"2024-01-15\",\n    \"due_date\": \"2024-01-30\",\n    \"amount\": 50000,\n    \"status\": \"unpaid\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/invoices",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invoices"]
+						}
+					}
+				},
+				{
+					"name": "Update Invoice",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 60000,\n    \"status\": \"paid\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/invoices/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invoices", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Invoice",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/invoices/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invoices", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Confirm Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payment_method\": \"bank_transfer\",\n    \"payment_date\": \"2024-01-20\",\n    \"payment_proof\": \"base64_encoded_image\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/invoices/:id/confirm-payment",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invoices", ":id", "confirm-payment"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Konfirmasi pembayaran invoice oleh admin"
+					}
+				},
+				{
+					"name": "Check VA Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/invoices/:id/va-status",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invoices", ":id", "va-status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Check status Virtual Account payment"
+					}
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Get Payments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/payments?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "payments"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Payment Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/payments/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "payments", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"invoice_id\": 1,\n    \"amount\": 50000,\n    \"payment_method\": \"bank_transfer\",\n    \"payment_date\": \"2024-01-20\",\n    \"status\": \"success\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/payments",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "payments"]
+						}
+					}
+				},
+				{
+					"name": "Update Payment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"verified\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/payments/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "payments", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Payment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/payments/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "payments", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://smart-environment-web.citiasiainc.id",
+			"type": "string"
+		}
+	]
+}

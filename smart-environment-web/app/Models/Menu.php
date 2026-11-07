@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Menu extends Model
+{
+    use HasFactory;
+    public $timestamps = false;
+
+    protected $fillable = [
+        'nama_menu','url','icon','id_html','parent_id','urutan','tipe_menu'
+    ];
+
+    public function submenus()
+    {
+        return $this->hasMany(Menu::class, 'parent_id', 'id');
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_has_menus', 'menu_id', 'role_id');
+    }
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class, 'menu_id', 'id');
+    }
+    public function parent()
+    {
+        return $this->belongsTo(Menu::class, 'parent_id', 'id');
+    }
+}

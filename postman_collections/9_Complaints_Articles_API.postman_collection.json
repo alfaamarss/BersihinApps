@@ -1,0 +1,453 @@
+{
+	"info": {
+		"_postman_id": "complaints-articles-api-009",
+		"name": "9. Complaints & Articles API",
+		"description": "API untuk Admin Web - Complaints dan Articles Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Complaints",
+			"item": [
+				{
+					"name": "Get Complaints",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/complaints?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "complaints"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Complaint Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/complaints/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "complaints", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Complaint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service_account_id\": 1,\n    \"complaint_type\": \"service\",\n    \"title\": \"Petugas tidak datang sesuai jadwal\",\n    \"description\": \"Petugas pengambilan sampah tidak datang sesuai jadwal yang ditentukan\",\n    \"status\": \"pending\",\n    \"priority\": \"medium\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/complaints",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "complaints"]
+						}
+					}
+				},
+				{
+					"name": "Update Complaint",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"in_progress\",\n    \"priority\": \"high\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/complaints/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "complaints", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Complaint",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/complaints/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "complaints", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"completed\",\n    \"admin_note\": \"Masalah telah diselesaikan\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/complaints/:id/status",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "complaints", ":id", "status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Update status complaint oleh admin"
+					}
+				},
+				{
+					"name": "Add Response",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"response\": \"Terima kasih atas laporannya. Kami akan segera menindaklanjuti.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/complaints/:id/response",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "complaints", ":id", "response"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Tambah tanggapan admin terhadap complaint"
+					}
+				}
+			]
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Get Articles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/articles?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "articles"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Article Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/articles/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "articles", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Article",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Tips Mengelola Sampah Organik di Rumah\",\n    \"slug\": \"tips-mengelola-sampah-organik\",\n    \"content\": \"<p>Berikut adalah beberapa tips untuk mengelola sampah organik...</p>\",\n    \"excerpt\": \"Panduan lengkap mengelola sampah organik\",\n    \"featured_image\": \"https://example.com/image.jpg\",\n    \"category\": \"tips\",\n    \"status\": \"published\",\n    \"published_at\": \"2024-01-15 10:00:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/articles",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "articles"]
+						}
+					}
+				},
+				{
+					"name": "Update Article",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Tips Mengelola Sampah Organik di Rumah - Updated\",\n    \"content\": \"<p>Berikut adalah beberapa tips update...</p>\",\n    \"status\": \"published\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/articles/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "articles", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Article",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/articles/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "articles", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Publish Article",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/articles/:id/publish",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "articles", ":id", "publish"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Publish article (ubah status menjadi published)"
+					}
+				},
+				{
+					"name": "Unpublish Article",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/articles/:id/unpublish",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "articles", ":id", "unpublish"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Unpublish article (ubah status menjadi draft)"
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://smart-environment-web.citiasiainc.id",
+			"type": "string"
+		}
+	]
+}

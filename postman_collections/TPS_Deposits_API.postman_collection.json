@@ -1,0 +1,611 @@
+{
+	"info": {
+		"_postman_id": "tps-deposits-api-001",
+		"name": "TPS Deposits API",
+		"description": "API untuk fitur Riwayat Setor Kolektor ke TPS (Tempat Pembuangan Sementara)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin Web",
+			"description": "Endpoints untuk Admin Web - Melihat riwayat setor kolektor",
+			"item": [
+				{
+					"name": "Get TPS Deposits List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/tps-deposits",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "tps-deposits"]
+						},
+						"description": "Mendapatkan daftar riwayat setor kolektor ke TPS (HTML View)"
+					}
+				},
+				{
+					"name": "Get TPS Deposits - Filter by Collector",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/tps-deposits?collector_id=1",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "tps-deposits"],
+							"query": [
+								{
+									"key": "collector_id",
+									"value": "1",
+									"description": "Filter berdasarkan ID kolektor"
+								}
+							]
+						},
+						"description": "Filter riwayat setor berdasarkan kolektor tertentu"
+					}
+				},
+				{
+					"name": "Get TPS Deposits - Filter by TPS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/tps-deposits?garbage_dump_id=1",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "tps-deposits"],
+							"query": [
+								{
+									"key": "garbage_dump_id",
+									"value": "1",
+									"description": "Filter berdasarkan ID TPS"
+								}
+							]
+						},
+						"description": "Filter riwayat setor berdasarkan TPS tujuan"
+					}
+				},
+				{
+					"name": "Get TPS Deposits - Filter by Date Range",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/tps-deposits?start_date=2025-12-01&end_date=2025-12-03",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "tps-deposits"],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2025-12-01",
+									"description": "Tanggal mulai (YYYY-MM-DD)"
+								},
+								{
+									"key": "end_date",
+									"value": "2025-12-03",
+									"description": "Tanggal akhir (YYYY-MM-DD)"
+								}
+							]
+						},
+						"description": "Filter riwayat setor berdasarkan rentang tanggal"
+					}
+				},
+				{
+					"name": "Get TPS Deposits - All Filters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/tps-deposits?collector_id=1&garbage_dump_id=1&start_date=2025-12-01&end_date=2025-12-03",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "tps-deposits"],
+							"query": [
+								{
+									"key": "collector_id",
+									"value": "1",
+									"description": "Filter berdasarkan ID kolektor"
+								},
+								{
+									"key": "garbage_dump_id",
+									"value": "1",
+									"description": "Filter berdasarkan ID TPS"
+								},
+								{
+									"key": "start_date",
+									"value": "2025-12-01",
+									"description": "Tanggal mulai (YYYY-MM-DD)"
+								},
+								{
+									"key": "end_date",
+									"value": "2025-12-03",
+									"description": "Tanggal akhir (YYYY-MM-DD)"
+								}
+							]
+						},
+						"description": "Filter riwayat setor dengan semua parameter filter"
+					}
+				}
+			]
+		},
+		{
+			"name": "Mobile Collector API",
+			"description": "Endpoints untuk Mobile App Collector - Submit dan lihat riwayat setor (Untuk referensi Tim Mobile). PENTING: Collector hanya bisa melihat dan setor ke TPS yang sudah di-assign oleh admin.",
+			"item": [
+				{
+					"name": "Get Assigned TPS List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/tps",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "tps"]
+						},
+						"description": "Mendapatkan daftar TPS yang di-assign ke collector yang sedang login. CATATAN: API ini hanya menampilkan TPS yang sudah di-assign ke collector melalui menu admin TPS. Jika collector belum di-assign ke TPS manapun, response akan mengembalikan array kosong."
+					},
+					"response": [
+						{
+							"name": "Success - Has Assigned TPS",
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Daftar TPS berhasil diambil\",\n  \"data\": {\n    \"tps_list\": [\n      {\n        \"id\": 1,\n        \"name\": \"TPS Sukamaju\",\n        \"address\": \"Jl. Raya Sukamaju No. 10\",\n        \"latitude\": -6.2345678,\n        \"longitude\": 106.8765432,\n        \"capacity_volume\": 100.00,\n        \"capacity_weight\": 5000.00,\n        \"status\": \"active\",\n        \"kecamatan\": {\n          \"id\": 1,\n          \"name\": \"Kecamatan Cilandak\"\n        },\n        \"kelurahan\": {\n          \"id\": 5,\n          \"name\": \"Kelurahan Sukamaju\"\n        },\n        \"rw\": {\n          \"id\": 10,\n          \"name\": \"RW 05\"\n        }\n      }\n    ]\n  }\n}"
+						},
+						{
+							"name": "Success - No Assigned TPS",
+							"status": "OK",
+							"code": 200,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Daftar TPS berhasil diambil\",\n  \"data\": {\n    \"tps_list\": []\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Submit Deposit to TPS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"garbage_dump_id\": 1,\n    \"latitude\": -6.2345678,\n    \"longitude\": 106.8765432,\n    \"notes\": \"Setor sampah organik dan anorganik\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/tps-deposits",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "tps-deposits"]
+						},
+						"description": "Mencatat aktivitas setor sampah ke TPS oleh kolektor. PENTING: Collector hanya bisa setor ke TPS yang sudah di-assign ke mereka. Jika mencoba setor ke TPS yang tidak di-assign, akan mendapatkan error 403."
+					},
+					"response": [
+						{
+							"name": "Success - Deposit Created",
+							"status": "Created",
+							"code": 201,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Setor ke TPS berhasil dicatat\",\n  \"data\": {\n    \"id\": 1,\n    \"collector_id\": 5,\n    \"garbage_dump_id\": 1,\n    \"deposited_at\": \"2025-12-04T10:30:00+07:00\",\n    \"latitude\": -6.2345678,\n    \"longitude\": 106.8765432,\n    \"notes\": \"Setor sampah organik dan anorganik\",\n    \"garbage_dump\": {\n      \"id\": 1,\n      \"name\": \"TPS Sukamaju\",\n      \"address\": \"Jl. Raya Sukamaju No. 10\"\n    }\n  }\n}"
+						},
+						{
+							"name": "Error - Not Assigned to TPS",
+							"status": "Forbidden",
+							"code": 403,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"success\": false,\n  \"message\": \"Anda tidak di-assign ke TPS ini\",\n  \"errors\": {\n    \"garbage_dump_id\": [\"Anda tidak memiliki izin untuk setor ke TPS ini\"]\n  }\n}"
+						},
+						{
+							"name": "Error - TPS Inactive",
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": "{\n  \"success\": false,\n  \"message\": \"TPS tidak aktif\",\n  \"errors\": {\n    \"garbage_dump_id\": [\"TPS tidak aktif atau tidak tersedia\"]\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get My Deposit History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/tps-deposits",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "tps-deposits"]
+						},
+						"description": "Mendapatkan riwayat setor sampah milik kolektor yang sedang login"
+					}
+				},
+				{
+					"name": "Get My Deposit History - With Filters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/tps-deposits?garbage_dump_id=1&start_date=2025-12-01&end_date=2025-12-03&per_page=15",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "tps-deposits"],
+							"query": [
+								{
+									"key": "garbage_dump_id",
+									"value": "1",
+									"description": "Filter berdasarkan ID TPS"
+								},
+								{
+									"key": "start_date",
+									"value": "2025-12-01",
+									"description": "Tanggal mulai (YYYY-MM-DD)"
+								},
+								{
+									"key": "end_date",
+									"value": "2025-12-03",
+									"description": "Tanggal akhir (YYYY-MM-DD)"
+								},
+								{
+									"key": "per_page",
+									"value": "15",
+									"description": "Jumlah data per halaman"
+								}
+							]
+						},
+						"description": "Mendapatkan riwayat setor dengan filter"
+					}
+				},
+				{
+					"name": "Get Deposit Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/tps-deposits/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "tps-deposits", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID deposit"
+								}
+							]
+						},
+						"description": "Mendapatkan detail record setor berdasarkan ID"
+					}
+				}
+			]
+		},
+		{
+			"name": "TPS Management (Reference)",
+			"description": "Endpoints untuk manajemen TPS - untuk referensi",
+			"item": [
+				{
+					"name": "Get TPS List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/garbage-dumps?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "garbage-dumps"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Mendapatkan daftar TPS"
+					}
+				},
+				{
+					"name": "Get TPS Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/garbage-dumps/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "garbage-dumps", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Mendapatkan detail TPS berdasarkan ID"
+					}
+				},
+				{
+					"name": "Create TPS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TPS Sukamaju\",\n    \"kecamatan_id\": 1,\n    \"kelurahan_id\": 5,\n    \"rw_id\": 10,\n    \"address\": \"Jl. Raya Sukamaju No. 10\",\n    \"latitude\": -6.2345678,\n    \"longitude\": 106.8765432,\n    \"capacity_volume\": 100.00,\n    \"capacity_weight\": 5000.00,\n    \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/garbage-dumps",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "garbage-dumps"]
+						},
+						"description": "Membuat TPS baru"
+					}
+				},
+				{
+					"name": "Update TPS",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TPS Sukamaju Updated\",\n    \"kecamatan_id\": 1,\n    \"kelurahan_id\": 5,\n    \"rw_id\": 10,\n    \"address\": \"Jl. Raya Sukamaju No. 10A\",\n    \"latitude\": -6.2345678,\n    \"longitude\": 106.8765432,\n    \"capacity_volume\": 150.00,\n    \"capacity_weight\": 7500.00,\n    \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/garbage-dumps/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "garbage-dumps", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Update data TPS"
+					}
+				},
+				{
+					"name": "Delete TPS",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/garbage-dumps/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "garbage-dumps", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Menghapus TPS"
+					}
+				},
+				{
+					"name": "Toggle TPS Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/garbage-dumps/:id/toggle-status",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "garbage-dumps", ":id", "toggle-status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Toggle status TPS (active/inactive)"
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

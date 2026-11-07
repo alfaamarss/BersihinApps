@@ -1,0 +1,1191 @@
+{
+	"info": {
+		"_postman_id": "mobile-resident-api-002",
+		"name": "2. Mobile Resident API",
+		"description": "API untuk Mobile App - Resident (Warga)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe Updated\",\n    \"phone\": \"081234567890\",\n    \"address\": \"Jl. Example No. 123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"current_password\": \"password123\",\n    \"password\": \"newpassword123\",\n    \"password_confirmation\": \"newpassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/profile/change-password",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "profile", "change-password"]
+						}
+					}
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "profile"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Waste Deliveries",
+			"item": [
+				{
+					"name": "Get Waste Deliveries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/waste-deliveries?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "waste-deliveries"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Waste Delivery Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/waste-deliveries/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "waste-deliveries", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Next Pickup",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/waste-deliveries/next/pickup",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "waste-deliveries", "next", "pickup"]
+						}
+					}
+				},
+				{
+					"name": "Get Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/waste-deliveries/statistics",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "waste-deliveries", "statistics"]
+						}
+					}
+				},
+				{
+					"name": "Confirm Pickup (Waste Delivery)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/waste-deliveries/:id/confirm",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "waste-deliveries", ":id", "confirm"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Konfirmasi pengambilan sampah oleh resident"
+					}
+				}
+			]
+		},
+		{
+			"name": "Pickups (Schedule-based)",
+			"item": [
+				{
+					"name": "Get Upcoming Pickups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/pickups/upcoming",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "pickups", "upcoming"]
+						}
+					}
+				},
+				{
+					"name": "Get Pickup History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/pickups/history?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "pickups", "history"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Pickup Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/pickups/statistics",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "pickups", "statistics"]
+						}
+					}
+				},
+				{
+					"name": "Get Pickup Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/pickups/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "pickups", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Confirm Pickup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"confirmed\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/pickups/:id/confirm",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "pickups", ":id", "confirm"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Pickup Note",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"note\": \"Tolong ambil sampah di depan rumah\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/pickups/:id/note",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "pickups", ":id", "note"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Get Articles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/articles?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "articles"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Featured Articles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/articles/featured",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "articles", "featured"]
+						}
+					}
+				},
+				{
+					"name": "Get Article Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/articles/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "articles", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Complaints",
+			"item": [
+				{
+					"name": "Get Complaints",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/complaints?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "complaints"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Complaint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Sampah tidak diambil\",\n    \"description\": \"Sampah sudah 3 hari tidak diambil\",\n    \"category\": \"pickup\",\n    \"priority\": \"high\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/complaints",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "complaints"]
+						}
+					}
+				},
+				{
+					"name": "Get Complaint Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/complaints/statistics",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "complaints", "statistics"]
+						}
+					}
+				},
+				{
+					"name": "Get Complaint Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/complaints/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "complaints", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Complaint",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Sampah tidak diambil (Updated)\",\n    \"description\": \"Sudah 4 hari tidak diambil\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/complaints/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "complaints", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Cancel Complaint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/complaints/:id/cancel",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "complaints", ":id", "cancel"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Confirm Resolution",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/complaints/:id/confirm-resolution",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "complaints", ":id", "confirm-resolution"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Konfirmasi bahwa keluhan sudah terselesaikan"
+					}
+				}
+			]
+		},
+		{
+			"name": "Off-Schedule Pickups",
+			"item": [
+				{
+					"name": "Get Pricing Info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/off-schedule-pickups/pricing-info",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "off-schedule-pickups", "pricing-info"]
+						},
+						"description": "Info harga untuk pickup diluar jadwal"
+					}
+				},
+				{
+					"name": "Preview Skip Scheduled",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service_account_id\": 1,\n    \"scheduled_pickup_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/off-schedule-pickups/preview-skip",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "off-schedule-pickups", "preview-skip"]
+						},
+						"description": "Preview biaya jika skip jadwal pickup"
+					}
+				},
+				{
+					"name": "Get Off-Schedule Pickups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/off-schedule-pickups?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "off-schedule-pickups"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Off-Schedule Pickup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service_account_id\": 1,\n    \"requested_date\": \"2024-01-20\",\n    \"requested_time\": \"09:00\",\n    \"notes\": \"Butuh pickup mendesak\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/off-schedule-pickups",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "off-schedule-pickups"]
+						},
+						"description": "Request pickup diluar jadwal"
+					}
+				},
+				{
+					"name": "Get Off-Schedule Pickup Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/off-schedule-pickups/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "off-schedule-pickups", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Confirm Off-Schedule Pickup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/off-schedule-pickups/:id/confirm",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "off-schedule-pickups", ":id", "confirm"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Konfirmasi off-schedule pickup"
+					}
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "Get Invoices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/invoices?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "invoices"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Unpaid Invoices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/invoices/unpaid",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "invoices", "unpaid"]
+						}
+					}
+				},
+				{
+					"name": "Get Invoice Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/invoices/statistics",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "invoices", "statistics"]
+						}
+					}
+				},
+				{
+					"name": "Get Invoice Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/invoices/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "invoices", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Dummy Pay Invoice",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/invoices/:id/dummy-pay",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "invoices", ":id", "dummy-pay"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Dummy payment untuk testing"
+					}
+				}
+			]
+		},
+		{
+			"name": "Payments (Midtrans)",
+			"item": [
+				{
+					"name": "Get Payments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/payments?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "payments"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Pending Payments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/payments/pending",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "payments", "pending"]
+						}
+					}
+				},
+				{
+					"name": "Create Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"invoice_ids\": [1, 2, 3],\n    \"payment_method\": \"gopay\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/payments/create",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "payments", "create"]
+						},
+						"description": "Create payment dengan Midtrans"
+					}
+				},
+				{
+					"name": "Get Payment Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/payments/:orderId",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "payments", ":orderId"],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "ORDER-123456"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Check Payment Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/payments/:orderId/status",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "payments", ":orderId", "status"],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "ORDER-123456"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Cancel Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/resident/payments/:orderId/cancel",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "resident", "payments", ":orderId", "cancel"],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "ORDER-123456"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://smart-environment-web.citiasiainc.id",
+			"type": "string"
+		}
+	]
+}

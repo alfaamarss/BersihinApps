@@ -1,0 +1,13 @@
+# services:
+#   web:
+#     # build: .
+#     image: ghcr.io/citiasia-inc/smart-environment-web:latest
+#     container_name: 'smart-environment-web'
+#     user: 'www-data:www-data'
+#     env_file:
+#       - .env
+#     ports:
+#       - "4041:80"
+#     restart: always
+#     volumes:
+#      - /home/ekosistemdesa/app/smart-environment-web/storage:/var/www/storage/app/

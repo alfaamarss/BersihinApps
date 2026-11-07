@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "webhooks-api-010",
+		"name": "10. Webhooks API",
+		"description": "API untuk Webhooks (Midtrans Payment Gateway)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Payment Webhook",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"transaction_time\": \"2024-01-20 10:00:00\",\n    \"transaction_status\": \"settlement\",\n    \"transaction_id\": \"abc123xyz\",\n    \"status_message\": \"midtrans payment notification\",\n    \"status_code\": \"200\",\n    \"signature_key\": \"signature_hash_from_midtrans\",\n    \"settlement_time\": \"2024-01-20 10:05:00\",\n    \"payment_type\": \"bank_transfer\",\n    \"order_id\": \"INV-2024-001\",\n    \"merchant_id\": \"G123456789\",\n    \"gross_amount\": \"50000.00\",\n    \"fraud_status\": \"accept\",\n    \"currency\": \"IDR\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/payments/webhook",
+					"host": ["{{base_url}}"],
+					"path": ["api", "v1", "payments", "webhook"]
+				},
+				"description": "Webhook notification dari Midtrans untuk payment (endpoint utama)"
+			}
+		},
+		{
+			"name": "Midtrans Webhook (Legacy)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"transaction_time\": \"2024-01-20 10:00:00\",\n    \"transaction_status\": \"settlement\",\n    \"transaction_id\": \"abc123xyz\",\n    \"status_message\": \"midtrans payment notification\",\n    \"status_code\": \"200\",\n    \"signature_key\": \"signature_hash_from_midtrans\",\n    \"settlement_time\": \"2024-01-20 10:05:00\",\n    \"payment_type\": \"bank_transfer\",\n    \"order_id\": \"INV-2024-001\",\n    \"merchant_id\": \"G123456789\",\n    \"gross_amount\": \"50000.00\",\n    \"fraud_status\": \"accept\",\n    \"currency\": \"IDR\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/midtrans/webhook",
+					"host": ["{{base_url}}"],
+					"path": ["api", "v1", "midtrans", "webhook"]
+				},
+				"description": "Legacy webhook endpoint untuk Midtrans"
+			}
+		},
+		{
+			"name": "Test Webhook",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/midtrans/webhook/test",
+					"host": ["{{base_url}}"],
+					"path": ["api", "v1", "midtrans", "webhook", "test"]
+				},
+				"description": "Endpoint untuk testing webhook (development only)"
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://smart-environment-web.citiasiainc.id",
+			"type": "string"
+		}
+	]
+}

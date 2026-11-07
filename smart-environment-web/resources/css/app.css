@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "../../public/assets/css/style.css";
+@import "jsvectormap/dist/jsvectormap.min.css";
+@import "flatpickr/dist/flatpickr.min.css";
+@import "dropzone/dist/dropzone.css";
+@import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
+@import "@fortawesome/fontawesome-free/css/solid.min.css";
+@import "@fortawesome/fontawesome-free/css/regular.min.css";
+@import "@fortawesome/fontawesome-free/css/brands.min.css";
+
+/* Prevent Alpine flash */
+[x-cloak]{display:none !important}

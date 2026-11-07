@@ -1,0 +1,761 @@
+{
+	"info": {
+		"_postman_id": "mobile-collector-api-003",
+		"name": "3. Mobile Collector API",
+		"description": "API untuk Mobile App - Collector (Petugas Pengambil Sampah)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Dashboard",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{auth_token}}"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/mobile/collector/dashboard",
+					"host": ["{{base_url}}"],
+					"path": ["api", "v1", "mobile", "collector", "dashboard"]
+				},
+				"description": "Dashboard untuk collector dengan statistik pickup hari ini"
+			},
+			"response": []
+		},
+		{
+			"name": "Schedules",
+			"item": [
+				{
+					"name": "Get Schedules",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/schedules",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "schedules"]
+						},
+						"description": "Daftar jadwal untuk collector"
+					}
+				},
+				{
+					"name": "Get Schedule Deliveries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/schedules/deliveries",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "schedules", "deliveries"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Deliveries (LEGACY)",
+			"item": [
+				{
+					"name": "Get Delivery Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/deliveries/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "deliveries", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Legacy endpoint untuk sistem lama"
+					}
+				},
+				{
+					"name": "Update Delivery Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"completed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/deliveries/:id/status",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "deliveries", ":id", "status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Legacy endpoint untuk sistem lama"
+					}
+				}
+			]
+		},
+		{
+			"name": "Pickups (Schedule-based NEW)",
+			"item": [
+				{
+					"name": "Get Today Pickups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/pickups/today",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "pickups", "today"]
+						},
+						"description": "Daftar pickup untuk hari ini"
+					}
+				},
+				{
+					"name": "Get Pickup History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/pickups/history?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "pickups", "history"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Pickup Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/pickups/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "pickups", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Start Pickup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"latitude\": -6.2088,\n    \"longitude\": 106.8456\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/pickups/:id/start",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "pickups", ":id", "start"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Mulai proses pickup"
+					}
+				},
+				{
+					"name": "Complete Pickup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"waste_items\": [\n        {\n            \"waste_id\": 1,\n            \"pocket_size_id\": 1,\n            \"quantity\": 2,\n            \"weight\": 5.5,\n            \"price\": 10000\n        },\n        {\n            \"waste_id\": 2,\n            \"pocket_size_id\": 2,\n            \"quantity\": 1,\n            \"weight\": 3.2,\n            \"price\": 8000\n        }\n    ],\n    \"photo\": \"base64_encoded_image_string\",\n    \"latitude\": -6.2088,\n    \"longitude\": 106.8456,\n    \"notes\": \"Pengambilan berjalan lancar\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/pickups/:id/complete",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "pickups", ":id", "complete"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Selesaikan pickup dengan data sampah yang diambil"
+					}
+				},
+				{
+					"name": "Skip Pickup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reason\": \"Tidak ada sampah\",\n    \"notes\": \"Rumah kosong\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/pickups/:id/skip",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "pickups", ":id", "skip"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Skip pickup jika tidak bisa dilakukan"
+					}
+				}
+			]
+		},
+		{
+			"name": "Waste Items",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{auth_token}}"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/mobile/collector/waste-items",
+					"host": ["{{base_url}}"],
+					"path": ["api", "v1", "mobile", "collector", "waste-items"]
+				},
+				"description": "Daftar jenis sampah beserta pricing untuk input saat complete pickup"
+			},
+			"response": []
+		},
+		{
+			"name": "Complaints",
+			"item": [
+				{
+					"name": "Get Assigned Complaints",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/complaints?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "complaints"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Keluhan yang ditugaskan ke collector"
+					}
+				},
+				{
+					"name": "Get Complaint Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/complaints/statistics",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "complaints", "statistics"]
+						}
+					}
+				},
+				{
+					"name": "Get Complaint Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/complaints/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "complaints", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Complaint Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"in_progress\",\n    \"response\": \"Sedang dalam penanganan\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/complaints/:id/update-status",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "complaints", ":id", "update-status"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Update status complaint: pending, in_progress, resolved, rejected"
+					}
+				}
+			]
+		},
+		{
+			"name": "Off-Schedule Pickups",
+			"item": [
+				{
+					"name": "Get Off-Schedule Pickups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/off-schedule-pickups?page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "off-schedule-pickups"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Daftar off-schedule pickup yang ditugaskan ke collector"
+					}
+				},
+				{
+					"name": "Get Waste Options",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/off-schedule-pickups/waste-options",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "off-schedule-pickups", "waste-options"]
+						},
+						"description": "Opsi jenis sampah untuk off-schedule pickup"
+					}
+				},
+				{
+					"name": "Get Off-Schedule Pickup Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/off-schedule-pickups/:id",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "off-schedule-pickups", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Complete Off-Schedule Pickup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"waste_items\": [\n        {\n            \"waste_id\": 1,\n            \"pocket_size_id\": 1,\n            \"quantity\": 2,\n            \"weight\": 5.5,\n            \"price\": 10000\n        }\n    ],\n    \"photo\": \"base64_encoded_image_string\",\n    \"latitude\": -6.2088,\n    \"longitude\": 106.8456,\n    \"notes\": \"Pengambilan selesai\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/off-schedule-pickups/:id/complete",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "off-schedule-pickups", ":id", "complete"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Selesaikan off-schedule pickup"
+					}
+				},
+				{
+					"name": "Skip Off-Schedule Pickup",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reason\": \"Tidak ada sampah\",\n    \"notes\": \"Rumah kosong\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/off-schedule-pickups/:id/skip",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "off-schedule-pickups", ":id", "skip"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Skip off-schedule pickup jika tidak bisa dilakukan"
+					}
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "profile"]
+						},
+						"description": "Lihat profil collector"
+					}
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Collector Name Updated\",\n    \"phone\": \"081234567890\",\n    \"address\": \"Jl. Contoh No. 123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "profile"]
+						},
+						"description": "Update profil collector"
+					}
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"current_password\": \"password123\",\n    \"password\": \"newpassword123\",\n    \"password_confirmation\": \"newpassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/profile/change-password",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "profile", "change-password"]
+						},
+						"description": "Ganti password collector"
+					}
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/mobile/collector/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "mobile", "collector", "profile"]
+						},
+						"description": "Hapus akun collector"
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://smart-environment-web.citiasiainc.id",
+			"type": "string"
+		}
+	]
+}
